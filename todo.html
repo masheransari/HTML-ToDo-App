@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+
+<body>
+
+    <div><h1>Jawan Pakistan</h1></div>
+    <h3>Muhammad Asher Ansari</h3>
+    <h4>Roll Number: KWOWCBC4435</h4>
+    <h1>ToDo App</h1>
+    <input placeholder="Enter your ToDo" id="iData" />
+    <button onclick="addTodo()">Add</button>
+    <button onclick="deleteAll()">Delete All</button>
+
+    <ul id="list"></ul>
+</body>
+
+<script>
+    var listToDo = document.getElementById("list");
+    function addTodo() {
+        var content = document.getElementById("iData").value;
+        if (content == "") {
+            alert("Enter ToDo First");
+        } else {
+            var _li = document.createElement("li");
+            var liText = document.createTextNode(content);
+
+            //Delete Button
+            var buttonDelete = document.createElement("button");
+            var buttonDeleteText = document.createTextNode("Delete");
+            buttonDelete.appendChild(buttonDeleteText);
+            buttonDelete.setAttribute("onClick", "del(this)");
+
+
+            //Edit Button
+            var buttonEdit = document.createElement("button");
+            var buttonEditText = document.createTextNode("Edit");
+            buttonEdit.appendChild(buttonEditText);
+            buttonEdit.setAttribute("onClick", "edit(this)");
+
+
+            _li.appendChild(liText);
+            _li.appendChild(buttonEdit);
+            _li.appendChild(buttonDelete);
+            console.log(_li);
+            listToDo.appendChild(_li);
+
+            document.getElementById("iData").value = "";
+        }
+    }
+    function del(a) {
+        a.parentNode.remove()
+    }
+    function edit(a) {
+        // console.log(a);
+        var editItem = prompt("Enter value", a.parentNode.firstChild.nodeValue);
+        a.parentNode.firstChild.nodeValue = editItem;
+    }
+
+    function deleteAll() {
+        listToDo.innerHTML = "";
+    }
+</script>
+
+</html> 
